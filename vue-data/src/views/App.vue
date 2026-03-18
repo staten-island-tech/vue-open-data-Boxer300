@@ -6,6 +6,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import arrestCard from '@/arrestCard.vue'
 const arrest = ref([])
 async function getArrest(){
   try {
