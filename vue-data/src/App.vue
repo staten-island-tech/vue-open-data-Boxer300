@@ -1,23 +1,23 @@
 <template>
   <div class = "container">
-<arrestCard v-for="(arrest) in arrests" :key="arrest.arrest_key"></arrestCard>
+<arrestCard v-for="(arrest) in arrests" :arrest="arrest"></arrestCard>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import arrestCard from '@/arrestCard.vue'
-const arrest = ref([])
+import arrestCard from './components/arrestCard.vue'
+const arrests = ref([])
 async function getArrest(){
   try {
     const response = await fetch('https://data.cityofnewyork.us/resource/uip8-fykc.json')
     const data = await response.json()
-    arrest.value = data
+    arrests.value = data
   } catch (error) {
     console.log(error)
   }
 }
-onMounted(() => {
+onMounted( async () => {
   getArrest()
 });
 </script>
