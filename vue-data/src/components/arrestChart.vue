@@ -1,5 +1,7 @@
 <template>
-  <Bar :data="chartData" />
+  <div style="max-width: 600px;">
+    <Bar :data="chartData" />
+  </div>
 </template>
 
 <script setup>
@@ -14,21 +16,21 @@ import {
   Legend
 } from 'chart.js'
 
+// 🔥 REQUIRED
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend)
 
 const props = defineProps({
   data: Object
 })
 
-const chartData = computed(() => {
-  return {
-    labels: Object.keys(props.data),
-    datasets: [
-      {
-        label: 'Arrests by Race',
-        data: Object.values(props.data),
-      }
-    ]
-  }
-})
+// chart format
+const chartData = computed(() => ({
+  labels: Object.keys(props.data || {}),
+  datasets: [
+    {
+      label: 'Arrests',
+      data: Object.values(props.data || {}),
+    }
+  ]
+}))
 </script>
